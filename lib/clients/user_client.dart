@@ -39,11 +39,6 @@ class UserClient {
   }
 
   static getUserById(int id) {
-    // var response = await http.get(Uri.https('dummyjson.com', '/users/$id'));
-    // var user = json.decode(response.body);
-    // if (user == null || user?['id'] == null) {
-    //   return;
-    // }
     Map user = allUsers.firstWhere((userMap) => userMap['id'] == id);
     return User(
       id: user['id'],
