@@ -13,19 +13,13 @@ class PostList extends StatefulWidget {
 
 class _PostListState extends State<PostList> {
   late ScrollController _scrollController;
-  // todo This should come from the API response.
-  // final _total = 100;
   bool isLoading = false;
   bool hasMore = true;
-
-  // List<Post> _allPosts = [];
-  List<Post> _filteredPosts = [];
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _filteredPosts = PostClient.getPosts();
   }
 
   @override
@@ -36,9 +30,13 @@ class _PostListState extends State<PostList> {
 
   @override
   Widget build(context) {
-    // var postState = context.watch<PostModel>();
+    var postState = context.watch<PostModel>();
 
-    // postState.setFilteredPosts(_allPosts);
+    Future.delayed(Duration.zero, () {
+      if (postState.posts.isEmpty) {
+        postState.setPosts(PostClient.getPosts());
+      }
+    });
 
     void loadMorePosts() {
       setState(() {
@@ -47,11 +45,13 @@ class _PostListState extends State<PostList> {
 
       Timer(Duration(seconds: 2), () {
         List<Post> posts = PostClient.getPosts(
-            idsToSkip: _filteredPosts.map((post) => post.id).toList());
-        print(posts.length);
+            idsToSkip: postState.posts.map((post) => post.id).toList());
         setState(() {
-          _filteredPosts = [..._filteredPosts, ...posts];
           hasMore = posts.length == PostClient.pageLimit;
+        });
+        print(posts.length);
+        Future.delayed(Duration.zero, () {
+          postState.setPosts([...postState.posts, ...posts]);
         });
 
         setState(() {
@@ -63,7 +63,7 @@ class _PostListState extends State<PostList> {
     Future<void> refresh() async {
       List<Post> posts = PostClient.getPosts();
       setState(() {
-        _filteredPosts = [...posts];
+        postState.setPosts([...posts]);
         hasMore = posts.length == PostClient.pageLimit;
       });
     }
@@ -81,17 +81,17 @@ class _PostListState extends State<PostList> {
     return Container(
       color: Theme.of(context).colorScheme.surfaceVariant,
       height: double.infinity,
-      child: _filteredPosts.length > 0
+      child: postState.posts.length > 0
           ? RefreshIndicator(
               onRefresh: refresh,
               child: ListView.separated(
                 controller: _scrollController,
-                itemCount: _filteredPosts.length + (hasMore ? 1 : 0),
+                itemCount: postState.posts.length + (hasMore ? 1 : 0),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 20,
                 ),
                 itemBuilder: (context, index) {
-                  if (index == _filteredPosts.length) {
+                  if (index == postState.posts.length) {
                     return Container(
                       padding: const EdgeInsets.symmetric(vertical: 60),
                       child: const SizedBox(
@@ -102,7 +102,7 @@ class _PostListState extends State<PostList> {
                     );
                   }
 
-                  return PostThumbnail(post: _filteredPosts[index]);
+                  return PostThumbnail(post: postState.posts[index]);
                 },
               ),
             )
