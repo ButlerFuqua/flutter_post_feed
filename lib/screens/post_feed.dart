@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/widgets/posts/post_list.dart';
+import 'package:flutter_post_feed/widgets/posts/search_bar.dart';
 
 class PostFeed extends StatefulWidget {
   const PostFeed({
@@ -30,6 +31,12 @@ class _PostFeedState extends State<PostFeed> {
         title: Text(widget.title),
       ),
       body: PostList(),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          PostSearchBar(),
+        ],
+      )),
     );
   }
 }
