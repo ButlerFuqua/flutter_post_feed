@@ -34,18 +34,13 @@ class _PostSearchBarState extends State<PostSearchBar> {
       setState(() {});
     }
 
-    return Column(
-      children: [
-        TextField(
-          controller: _controller,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Search titles and descriptions',
-          ),
-          onChanged: handleSearchInput,
-        ),
-        Text(postState.searchInput),
-      ],
+    return TextField(
+      controller: _controller,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'Search titles and descriptions',
+      ),
+      onChanged: handleSearchInput,
     );
   }
 }

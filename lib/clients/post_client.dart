@@ -72,11 +72,13 @@ class PostClient {
 
   static List<Post> searchPosts(List<Post> posts, String searchInput) {
     String criteria = searchInput.trim().toLowerCase();
+    print('criteria: $criteria');
     if (criteria == '') {
       return posts;
     }
     return posts
         .where((post) => post.title.toLowerCase().contains(criteria)
+            // TODO uncomment this to search description as well
             // post.body.toLowerCase().contains(criteria)
             )
         .toList();

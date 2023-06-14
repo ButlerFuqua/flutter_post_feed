@@ -32,9 +32,16 @@ class _PostListState extends State<PostList> {
   Widget build(context) {
     var postState = context.watch<PostModel>();
 
+    List<Post> getFilteredPosts({List<int>? idsToSkip}) {
+      return PostClient.getPosts(
+          sortBy: postState.sortBy,
+          searchInput: postState.searchInput,
+          idsToSkip: idsToSkip);
+    }
+
     Future.delayed(Duration.zero, () {
       if (postState.posts.isEmpty) {
-        postState.setPosts(PostClient.getPosts(sortBy: postState.sortBy));
+        postState.setPosts(getFilteredPosts());
       }
     });
 
@@ -44,9 +51,8 @@ class _PostListState extends State<PostList> {
       });
 
       Timer(Duration(seconds: 2), () {
-        List<Post> posts = PostClient.getPosts(
+        List<Post> posts = getFilteredPosts(
           idsToSkip: postState.posts.map((post) => post.id).toList(),
-          sortBy: postState.sortBy,
         );
         setState(() {
           hasMore = posts.length == PostClient.pageLimit;
@@ -61,7 +67,7 @@ class _PostListState extends State<PostList> {
     }
 
     Future<void> refresh() async {
-      List<Post> posts = PostClient.getPosts();
+      List<Post> posts = getFilteredPosts();
       setState(() {
         postState.setPosts([...posts]);
         hasMore = posts.length == PostClient.pageLimit;
