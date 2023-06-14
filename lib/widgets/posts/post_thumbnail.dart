@@ -94,11 +94,6 @@ class _PostThumbnailState extends State<PostThumbnail> {
                   likedIds: widget.post.reactions,
                   postId: widget.post.id,
                 ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'View Post',
-                    )),
                 CommentButton(
                   commentIds: widget.post.comments.map((comment) => comment.id),
                   postId: widget.post.id,
