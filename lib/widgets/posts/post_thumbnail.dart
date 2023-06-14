@@ -3,6 +3,7 @@ import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 import 'package:flutter_post_feed/utils/string_utils.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_button.dart';
+import 'package:flutter_post_feed/widgets/common/post_title.dart';
 import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
 
 class PostThumbnail extends StatefulWidget {
@@ -34,11 +35,6 @@ class _PostThumbnailState extends State<PostThumbnail> {
     var postBody = widget.post.body;
     const double paddingSize = 10;
 
-    final theme = Theme.of(context);
-    final titleStyle = theme.textTheme.displaySmall!.copyWith(
-      color: theme.colorScheme.primary,
-    );
-
     return Container(
       color: Theme.of(context).colorScheme.surface,
       width: double.infinity,
@@ -60,8 +56,7 @@ class _PostThumbnailState extends State<PostThumbnail> {
                       width: 20,
                     ),
                     Text(
-                      // TODO remove user.id
-                      '${widget.post.user.id} ${widget.post.user.username}',
+                      widget.post.user.username,
                     ),
                   ],
                 ),
@@ -75,10 +70,8 @@ class _PostThumbnailState extends State<PostThumbnail> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(paddingSize),
-            child: Text(
-              // TODO remove id here
-              '${widget.post.id} $postTitle',
-              style: titleStyle,
+            child: PostTitle(
+              titleText: postTitle,
             ),
           ),
           Container(
@@ -108,6 +101,7 @@ class _PostThumbnailState extends State<PostThumbnail> {
                     )),
                 CommentButton(
                   commentIds: widget.post.comments.map((comment) => comment.id),
+                  postId: widget.post.id,
                 ),
               ],
             ),

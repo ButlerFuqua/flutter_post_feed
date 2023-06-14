@@ -55,6 +55,10 @@ class PostClient {
     return posts;
   }
 
+  static Post getPostById(int postId) {
+    return getPosts().firstWhere((post) => post.id == postId);
+  }
+
   static List<Post> sortPosts(List<Post> unsortedPosts, var sortBy) {
     if (sortBy == SortPostsBy.none) {
       return unsortedPosts;

@@ -28,11 +28,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: PostFeed.routeName,
-      routes: <String, WidgetBuilder>{
-        PostFeed.routeName: (_) => const PostFeed()
-      },
+      home: const PostFeed(),
+      // initialRoute: PostFeed.routeName,
+      // routes: <String, WidgetBuilder>{
+      //   PostFeed.routeName: (_) => const PostFeed()
+      // },
     );
   }
 }
