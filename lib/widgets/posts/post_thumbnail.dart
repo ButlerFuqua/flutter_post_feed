@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
-import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 import 'package:flutter_post_feed/utils/string_utils.dart';
-import 'package:intl/intl.dart';
 
 class PostThumbnail extends StatefulWidget {
   const PostThumbnail({
@@ -33,7 +31,6 @@ class _PostThumbnailState extends State<PostThumbnail> {
     var postTitle = widget.post.title;
     var postBody = widget.post.body;
     const double paddingSize = 10;
-    final maxDescriptionLength = 150;
 
     final theme = Theme.of(context);
     final titleStyle = theme.textTheme.displaySmall!.copyWith(

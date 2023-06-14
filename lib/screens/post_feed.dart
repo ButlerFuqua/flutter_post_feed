@@ -18,14 +18,6 @@ class PostFeed extends StatefulWidget {
 }
 
 class _PostFeedState extends State<PostFeed> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

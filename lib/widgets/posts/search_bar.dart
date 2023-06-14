@@ -26,7 +26,7 @@ class _PostSearchBarState extends State<PostSearchBar> {
     var postState = context.watch<PostModel>();
 
     if (_controller.text != postState.searchInput) {
-      _controller.text = postState.searchInput ?? '';
+      _controller.text = postState.searchInput;
     }
 
     void handleSearchInput(String input) {
