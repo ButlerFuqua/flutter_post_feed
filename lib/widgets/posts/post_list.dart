@@ -14,7 +14,6 @@ class PostList extends StatefulWidget {
 class _PostListState extends State<PostList> {
   late ScrollController _scrollController;
   bool isLoading = false;
-  bool hasMore = true;
 
   @override
   void initState() {
@@ -54,9 +53,6 @@ class _PostListState extends State<PostList> {
         List<Post> posts = getFilteredPosts(
           idsToSkip: postState.posts.map((post) => post.id).toList(),
         );
-        setState(() {
-          hasMore = posts.length == PostClient.pageLimit;
-        });
         Future.delayed(Duration.zero, () {
           postState.setPosts([...postState.posts, ...posts]);
         });
@@ -68,17 +64,14 @@ class _PostListState extends State<PostList> {
 
     Future<void> refresh() async {
       List<Post> posts = getFilteredPosts();
-      setState(() {
-        postState.setPosts([...posts]);
-        hasMore = posts.length == PostClient.pageLimit;
-      });
+      postState.setPosts([...posts]);
     }
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
               _scrollController.position.maxScrollExtent * 0.95 &&
           !isLoading) {
-        if (hasMore) {
+        if (PostClient.hasMore) {
           loadMorePosts();
         }
       }
@@ -92,7 +85,8 @@ class _PostListState extends State<PostList> {
               onRefresh: refresh,
               child: ListView.separated(
                 controller: _scrollController,
-                itemCount: postState.posts.length + (hasMore ? 1 : 0),
+                itemCount:
+                    postState.posts.length + (PostClient.hasMore ? 1 : 0),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 20,
                 ),
@@ -107,7 +101,6 @@ class _PostListState extends State<PostList> {
                       ),
                     );
                   }
-
                   return PostThumbnail(post: postState.posts[index]);
                 },
               ),

@@ -30,6 +30,7 @@ class Post {
 
 class PostClient {
   static int pageLimit = 10;
+  static bool hasMore = true;
 
   static List<Post> getPosts(
       {var sortBy = SortPostsBy.none, searchInput = '', List<int>? idsToSkip}) {
@@ -43,9 +44,13 @@ class PostClient {
     posts = PostClient.sortPosts(posts, sortBy);
     posts = PostClient.searchPosts(posts, searchInput);
 
-    return posts.length <= PostClient.pageLimit
+    posts = posts.length <= PostClient.pageLimit
         ? posts
         : posts.sublist(0, PostClient.pageLimit);
+
+    PostClient.hasMore = posts.length == PostClient.pageLimit;
+
+    return posts;
   }
 
   static List<Post> sortPosts(List<Post> unsortedPosts, var sortBy) {
