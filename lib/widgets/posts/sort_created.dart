@@ -15,20 +15,15 @@ class _SortByCreatedState extends State<SortByCreated> {
     var postState = context.watch<PostModel>();
 
     void handlePressed() {
-      print(postState.sortBy);
       if (postState.sortBy == SortPostsBy.created_desc) {
         return postState.sortPostsBy(SortPostsBy.none);
       }
-
       if (postState.sortBy != SortPostsBy.created_asc) {
         return postState.sortPostsBy(SortPostsBy.created_asc);
       }
-
       if (postState.sortBy == SortPostsBy.created_asc) {
         return postState.sortPostsBy(SortPostsBy.created_desc);
       }
-      print(postState.sortBy);
-
       postState.sortPostsBy(SortPostsBy.none);
     }
 
