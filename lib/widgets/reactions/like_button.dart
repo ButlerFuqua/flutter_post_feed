@@ -40,17 +40,11 @@ class _LikeButtonState extends State<LikeButton> {
           userId: currentUserId, postId: widget.postId);
     }
 
-    return Column(
-      children: [
-        TextButton(
-            onPressed: handlePressed,
-            child: Text(
-              'Like (${_likedIds.length})',
-              style: TextStyle(color: getColor()),
-            )),
-        Text('current: ${userState.currentUser.id}'),
-        ..._likedIds.map((id) => Text('$id')).toList(),
-      ],
-    );
+    return TextButton(
+        onPressed: handlePressed,
+        child: Text(
+          'Like (${_likedIds.length})',
+          style: TextStyle(color: getColor()),
+        ));
   }
 }
