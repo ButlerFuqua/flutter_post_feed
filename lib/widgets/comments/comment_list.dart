@@ -35,18 +35,26 @@ class _CommentListState extends State<CommentList> {
 
     var post = postState.posts.firstWhere((post) => post.id == widget.post.id);
 
-    return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: post.comments.length,
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 20,
-      ),
-      itemBuilder: (context, index) {
-        return CommentDisplay(
-          comment: post.comments[index],
-        );
-      },
+    return Column(
+      children: [
+        Text('${post.comments.length} Comments'),
+        SizedBox(
+          height: 10,
+        ),
+        ListView.separated(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: post.comments.length,
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 20,
+          ),
+          itemBuilder: (context, index) {
+            return CommentDisplay(
+              comment: post.comments[index],
+            );
+          },
+        ),
+      ],
     );
   }
 }
