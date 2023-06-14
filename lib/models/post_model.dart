@@ -42,4 +42,15 @@ class PostModel extends ChangeNotifier {
     _posts = PostClient.getPosts(
         searchInput: searchInput.trim().toLowerCase(), sortBy: sortBy);
   }
+
+  void toggleLikeFromPost({userId, postId}) {
+    Post post =
+        _posts[_posts.indexOf(_posts.firstWhere((post) => post.id == postId))];
+    if (post.reactions.contains(userId)) {
+      post.reactions.remove(userId);
+    } else {
+      post.reactions.add(userId);
+    }
+    notifyListeners();
+  }
 }

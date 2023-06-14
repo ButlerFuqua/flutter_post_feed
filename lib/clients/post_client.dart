@@ -18,7 +18,7 @@ class Post {
   final String title;
   final String body;
   final int userId;
-  final List<int> reactions;
+  List reactions;
   final String imageUrl;
   final DateTime createdDate;
   final DateTime modifiedDate;
@@ -42,7 +42,7 @@ class PostClient {
     }
 
     posts = PostClient.sortPosts(posts, sortBy);
-    posts = PostClient.searchPosts(posts, searchInput);
+    posts = PostClient.filterByTitleAndDesc(posts, searchInput);
 
     posts = posts.length <= PostClient.pageLimit
         ? posts
@@ -81,7 +81,7 @@ class PostClient {
     return posts;
   }
 
-  static List<Post> searchPosts(List<Post> posts, String searchInput) {
+  static List<Post> filterByTitleAndDesc(List<Post> posts, String searchInput) {
     String criteria = searchInput.trim().toLowerCase();
     if (criteria == '') {
       return posts;
@@ -92,5 +92,10 @@ class PostClient {
             // post.body.toLowerCase().contains(criteria)
             )
         .toList();
+  }
+
+  static toggleLikePost({userId, postId, hasLiked}) {
+    print(
+        '${hasLiked ? "REMOVE" : "ADD"} LIKE FROM DB for user $userId on post $postId');
   }
 }

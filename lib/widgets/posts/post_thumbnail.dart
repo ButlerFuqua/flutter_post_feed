@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 import 'package:flutter_post_feed/utils/string_utils.dart';
+import 'package:flutter_post_feed/widgets/reactions/like_button.dart';
 
 class PostThumbnail extends StatefulWidget {
   const PostThumbnail({
@@ -54,15 +55,16 @@ class _PostThumbnailState extends State<PostThumbnail> {
                     CircleAvatar(
                       backgroundImage: NetworkImage(widget.post.user?.imageUrl),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Text(
-                      widget.post.user?.username ?? 'Loading...',
+                      // TODO remove user.id
+                      '${widget.post.user.id} ${widget.post.user.username}',
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Text(getDisplayDate(widget.post.createdDate)),
@@ -94,11 +96,10 @@ class _PostThumbnailState extends State<PostThumbnail> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Like (${widget.post.reactions.length})',
-                    )),
+                LikeButton(
+                  likedIds: widget.post.reactions,
+                  postId: widget.post.id,
+                ),
                 TextButton(
                     onPressed: () {},
                     child: const Text(

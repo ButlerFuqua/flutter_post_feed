@@ -1,5 +1,6 @@
 import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/fakeData/fakeUsers.dart';
+import 'package:flutter_post_feed/utils/user_utils.dart';
 
 class User {
   User({
@@ -21,32 +22,17 @@ class User {
 }
 
 class UserClient {
-  static List<User> getAllUsers({limit = '10', skip = '0'}) {
+  static List<User> getAllUsers() {
     List<User> users = [];
     for (var i = 0; i < allUsers.length; i++) {
       var user = allUsers[i];
-      int userId = user['id'];
-      users.add(User(
-        id: userId,
-        email: user['email'],
-        username: user['username'],
-        firstName: user['firstName'],
-        lastName: user['lastName'],
-        imageUrl: user['image'],
-      ));
+      users.add(convertUserMapToUser(user));
     }
     return users;
   }
 
   static getUserById(int id) {
     Map user = allUsers.firstWhere((userMap) => userMap['id'] == id);
-    return User(
-      id: user['id'],
-      email: user['email'],
-      username: user['username'],
-      firstName: user['firstName'],
-      lastName: user['lastName'],
-      imageUrl: user['image'],
-    );
+    return convertUserMapToUser(user);
   }
 }

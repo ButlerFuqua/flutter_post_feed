@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
+import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:flutter_post_feed/screens/post_feed.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => PostModel()),
+        ChangeNotifierProvider(create: (context) => UserModel()),
       ],
       child: const MyApp(),
     ),
