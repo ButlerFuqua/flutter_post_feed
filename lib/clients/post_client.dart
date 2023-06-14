@@ -48,6 +48,8 @@ class PostClient {
         ? posts
         : posts.sublist(0, PostClient.pageLimit);
 
+    posts = populateReactionsFromState(posts);
+
     PostClient.hasMore = posts.length == PostClient.pageLimit;
 
     return posts;

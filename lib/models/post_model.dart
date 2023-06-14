@@ -18,6 +18,7 @@ class PostModel extends ChangeNotifier {
 
   var sortBy = SortPostsBy.created_asc;
   String searchInput = '';
+  static Map likedStateMap = {};
 
   UnmodifiableListView<Post> get posts => UnmodifiableListView(_posts);
 
@@ -48,8 +49,14 @@ class PostModel extends ChangeNotifier {
         _posts[_posts.indexOf(_posts.firstWhere((post) => post.id == postId))];
     if (post.reactions.contains(userId)) {
       post.reactions.remove(userId);
+      if (likedStateMap[postId] != null) {
+        likedStateMap[postId].remove(userId);
+      }
     } else {
       post.reactions.add(userId);
+      likedStateMap[postId] = likedStateMap[postId] != null
+          ? [...likedStateMap[postId], userId]
+          : [userId];
     }
     notifyListeners();
   }
