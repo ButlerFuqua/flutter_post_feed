@@ -9,6 +9,8 @@ enum SortPostsBy {
   least_liked,
   created_asc,
   created_desc,
+  author_asc,
+  author_desc,
 }
 
 class PostModel extends ChangeNotifier {

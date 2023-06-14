@@ -66,13 +66,18 @@ class PostClient {
       case SortPostsBy.created_desc:
         posts.sort((a, b) => b.createdDate.compareTo(a.createdDate));
         break;
+      case SortPostsBy.author_asc:
+        posts.sort((a, b) => a.user.username.compareTo(b.user.username));
+        break;
+      case SortPostsBy.author_desc:
+        posts.sort((a, b) => b.user.username.compareTo(a.user.username));
+        break;
     }
     return posts;
   }
 
   static List<Post> searchPosts(List<Post> posts, String searchInput) {
     String criteria = searchInput.trim().toLowerCase();
-    print('criteria: $criteria');
     if (criteria == '') {
       return posts;
     }
