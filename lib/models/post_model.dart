@@ -1,7 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
+import 'package:flutter_post_feed/fakeData/fakeComments.dart';
 
 enum SortPostsBy {
   none,
@@ -19,6 +21,7 @@ class PostModel extends ChangeNotifier {
   var sortBy = SortPostsBy.created_asc;
   String searchInput = '';
   static Map likedStateMap = {};
+  static Map newCommentsMap = {};
 
   UnmodifiableListView<Post> get posts => UnmodifiableListView(_posts);
 
@@ -58,6 +61,20 @@ class PostModel extends ChangeNotifier {
           ? [...likedStateMap[postId], userId]
           : [userId];
     }
+    notifyListeners();
+  }
+
+  void addCommentToPost(Map commentMap) {
+    Comment newComment = Comment(
+      id: allComments.length + 1,
+      body: commentMap['body'],
+      postId: commentMap['postId'],
+      user: commentMap['user'],
+    );
+    _posts[_posts
+            .indexOf(_posts.firstWhere((post) => post.id == newComment.postId))]
+        .comments
+        .add(newComment);
     notifyListeners();
   }
 }

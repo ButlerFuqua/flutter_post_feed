@@ -40,4 +40,8 @@ class CommentClient {
     comment.user = user;
     return comment;
   }
+
+  static addComment(Map newComment) {
+    print('Added to comment to post!');
+  }
 }

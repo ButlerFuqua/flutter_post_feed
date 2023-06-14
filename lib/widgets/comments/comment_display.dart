@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/comment_client.dart';
+import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:flutter_post_feed/widgets/common/user_thumbnail.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,13 @@ class _CommentDisplayState extends State<CommentDisplay> {
   @override
   void initState() {
     super.initState();
-    _comment = CommentClient.getCommentById(widget.comment.id);
+    // _comment = CommentClient.getCommentById(widget.comment.id);
+    _comment = widget.comment;
+    if (_comment.user is User) {
+      _comment.user = UserClient.getUserById(_comment.user.id);
+    } else {
+      _comment.user = UserClient.getUserById(_comment.user['id']);
+    }
   }
 
   @override

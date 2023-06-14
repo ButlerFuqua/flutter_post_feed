@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_list.dart';
+import 'package:flutter_post_feed/widgets/comments/post_comment_field.dart';
 import 'package:flutter_post_feed/widgets/common/post_title.dart';
 
 class PostRead extends StatefulWidget {
@@ -66,6 +67,9 @@ class _PostReadState extends State<PostRead> {
                   height: separatedHeight * 2,
                 ),
                 CommentList(post: _post),
+                const SizedBox(
+                  height: separatedHeight * 3,
+                ),
               ]),
             )
           : isLoading
@@ -77,6 +81,12 @@ class _PostReadState extends State<PostRead> {
               : const Center(
                   child: Text('Error getting post'),
                 ),
+      bottomSheet: _post != null && !isLoading
+          ? BottomAppBar(
+              child: SubmitCommentField(postId: _post.id),
+              // child: TextField(),
+            )
+          : Text('Loading...'),
     );
   }
 }
