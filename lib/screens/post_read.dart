@@ -67,10 +67,13 @@ class _PostReadState extends State<PostRead> {
                 const SizedBox(
                   height: separatedHeight * 2,
                 ),
-                ListView.builder(
+                ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 180,
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 20,
+                  ),
                   itemBuilder: (context, index) {
                     return Text('Some text');
                   },
