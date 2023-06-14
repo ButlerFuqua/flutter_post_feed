@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 import 'package:flutter_post_feed/utils/string_utils.dart';
+import 'package:flutter_post_feed/widgets/comments/comment_button.dart';
 import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
 
 class PostThumbnail extends StatefulWidget {
@@ -105,11 +106,9 @@ class _PostThumbnailState extends State<PostThumbnail> {
                     child: const Text(
                       'View Post',
                     )),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Comments (${widget.post.comments.length})',
-                    )),
+                CommentButton(
+                  commentIds: widget.post.comments.map((comment) => comment.id),
+                ),
               ],
             ),
           ),

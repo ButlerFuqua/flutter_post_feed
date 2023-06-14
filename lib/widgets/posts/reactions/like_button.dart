@@ -44,7 +44,9 @@ class _LikeButtonState extends State<LikeButton> {
         onPressed: handlePressed,
         child: Text(
           'Like (${_likedIds.length})',
-          style: TextStyle(color: getColor()),
+          style: TextStyle(
+            color: getColor(),
+          ),
         ));
   }
 }
