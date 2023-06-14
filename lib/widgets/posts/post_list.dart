@@ -45,15 +45,15 @@ class _PostListState extends State<PostList> {
 
       Timer(Duration(seconds: 2), () {
         List<Post> posts = PostClient.getPosts(
-            idsToSkip: postState.posts.map((post) => post.id).toList());
+          idsToSkip: postState.posts.map((post) => post.id).toList(),
+          sortBy: postState.sortBy,
+        );
         setState(() {
           hasMore = posts.length == PostClient.pageLimit;
         });
-        print(posts.length);
         Future.delayed(Duration.zero, () {
           postState.setPosts([...postState.posts, ...posts]);
         });
-
         setState(() {
           isLoading = false;
         });

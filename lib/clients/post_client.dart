@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/fakeData/fakePosts.dart';
+import 'package:flutter_post_feed/models/post_model.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 
 class Post {
@@ -29,12 +30,22 @@ class Post {
 class PostClient {
   static int pageLimit = 10;
 
-  static List<Post> getPosts({searchInput = '', List<int>? idsToSkip}) {
+  static List<Post> getPosts(
+      {var sortBy = SortPostsBy.none, searchInput = '', List<int>? idsToSkip}) {
     List<Post> posts =
         allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
 
     if (idsToSkip != null && idsToSkip.isNotEmpty) {
       posts = posts.where((post) => !idsToSkip.contains(post.id)).toList();
+    }
+
+    switch (sortBy) {
+      case SortPostsBy.most_liked:
+        posts.sort((a, b) => b.reactions.length.compareTo(a.reactions.length));
+        break;
+      case SortPostsBy.least_liked:
+        posts.sort((a, b) => a.reactions.length.compareTo(b.reactions.length));
+        break;
     }
 
     return posts.length <= PostClient.pageLimit
