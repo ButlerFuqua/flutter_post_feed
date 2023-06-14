@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/fakeData/fakePosts.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
@@ -43,6 +40,15 @@ class PostClient {
       posts = posts.where((post) => !idsToSkip.contains(post.id)).toList();
     }
 
+    List<Post> sortedPosts = PostClient.sortPosts(posts, sortBy);
+
+    return sortedPosts.length <= PostClient.pageLimit
+        ? sortedPosts
+        : sortedPosts.sublist(0, PostClient.pageLimit);
+  }
+
+  static List<Post> sortPosts(List<Post> unsortedPosts, var sortBy) {
+    List<Post> posts = List<Post>.from(unsortedPosts);
     switch (sortBy) {
       case SortPostsBy.most_liked:
         posts.sort((a, b) => b.reactions.length.compareTo(a.reactions.length));
@@ -57,9 +63,6 @@ class PostClient {
         posts.sort((a, b) => b.createdDate.compareTo(a.createdDate));
         break;
     }
-
-    return posts.length <= PostClient.pageLimit
-        ? posts
-        : posts.sublist(0, PostClient.pageLimit);
+    return posts;
   }
 }
