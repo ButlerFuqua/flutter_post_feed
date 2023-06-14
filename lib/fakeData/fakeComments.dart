@@ -2068,5 +2068,32 @@ List<Map> allComments = [
         "I could say this is one of the greatest pic of yours, but I’ll have to repeat my comment on your next insta post.",
     "postId": 71,
     "user": {"id": 86, "username": "whuman2d"}
-  }
+  },
+  // Added by me
+  {
+    "id": 341,
+    "body":
+        "I could say this is one of the greatest pic of yours, but I’ll have to repeat my comment on your next insta post.",
+    "postId": 1,
+    "user": {"id": 86, "username": "whuman2d"}
+  },
+  {
+    "id": 342,
+    "body": "Here is a great comment about this post.",
+    "postId": 1,
+    "user": {"id": 87, "username": "whuman2d"}
+  },
+  {
+    "id": 343,
+    "body": "This post was made by the current user that I hardcoded in yall!!",
+    "postId": 1,
+    "user": {"id": 100, "username": "whuman2d"}
+  },
+  {
+    "id": 344,
+    "body":
+        "This is a comment on a post that has been posted and now commented on, yall!!",
+    "postId": 1,
+    "user": {"id": 50, "username": "whuman2d"}
+  },
 ];

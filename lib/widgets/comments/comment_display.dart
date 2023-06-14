@@ -30,13 +30,25 @@ class _CommentDisplayState extends State<CommentDisplay> {
   Widget build(BuildContext context) {
     var userState = context.watch<UserModel>();
 
+    const double paddingSize = 10;
+
     bool isCurrentsComment = _comment.user.id == userState.currentUser.id;
 
-    const double paddingSize = 10;
+    dynamic getCommentAlignment() {
+      return !isCurrentsComment
+          ? FractionalOffset.topLeft
+          : FractionalOffset.topRight;
+    }
+
+    dynamic getContentAlignment() {
+      return !isCurrentsComment
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.end;
+    }
 
     return FractionallySizedBox(
       widthFactor: 0.8,
-      alignment: FractionalOffset.topLeft,
+      alignment: getCommentAlignment(),
       child: Container(
         padding: const EdgeInsets.all(paddingSize),
         margin: const EdgeInsets.all(paddingSize),
@@ -44,12 +56,20 @@ class _CommentDisplayState extends State<CommentDisplay> {
             border: Border.all(
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            )),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: getContentAlignment(),
           children: [
             UserThumbnail(user: _comment.user),
-            Text(_comment.body),
+            SizedBox(
+              height: paddingSize / 2,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(paddingSize),
+              child: Text(_comment.body),
+            ),
           ],
         ),
       ),
