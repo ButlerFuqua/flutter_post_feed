@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:flutter_post_feed/screens/post_read.dart';
 import 'package:provider/provider.dart';
 
 class CommentButton extends StatelessWidget {
-  const CommentButton({super.key, this.commentIds, this.postId});
+  const CommentButton({super.key, this.comments, this.postId});
 
-  final commentIds;
+  final comments;
   final postId;
 
   @override
   Widget build(BuildContext context) {
     var userState = context.watch<UserModel>();
-    bool _userLikedThis = commentIds.contains(userState.currentUser.id);
+    bool _userHasCommented = comments
+        .map((comment) =>
+            (comment.user is User ? comment.user.id : comment.user['id']))
+        .contains(userState.currentUser.id);
+
     getColor() {
-      return _userLikedThis
+      return _userHasCommented
           ? Colors.deepOrange
           : Theme.of(context).colorScheme.primary;
     }
@@ -32,7 +37,7 @@ class CommentButton extends StatelessWidget {
     return TextButton(
         onPressed: handlePressed,
         child: Text(
-          'Comments (${commentIds.length})',
+          'Comments (${comments.length})',
           style: TextStyle(
             color: getColor(),
           ),

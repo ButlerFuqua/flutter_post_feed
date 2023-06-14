@@ -48,19 +48,6 @@ class _PostThumbnailState extends State<PostThumbnail> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Row(
-                //   children: [
-                //     CircleAvatar(
-                //       backgroundImage: NetworkImage(widget.post.user?.imageUrl),
-                //     ),
-                //     const SizedBox(
-                //       width: 20,
-                //     ),
-                //     Text(
-                //       widget.post.user.username,
-                //     ),
-                //   ],
-                // ),
                 UserThumbnail(
                   user: widget.post.user,
                 ),
@@ -99,7 +86,7 @@ class _PostThumbnailState extends State<PostThumbnail> {
                   postId: widget.post.id,
                 ),
                 CommentButton(
-                  commentIds: widget.post.comments.map((comment) => comment.id),
+                  comments: widget.post.comments,
                   postId: widget.post.id,
                 ),
               ],
