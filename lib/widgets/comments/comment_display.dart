@@ -63,7 +63,7 @@ class _CommentDisplayState extends State<CommentDisplay> {
           crossAxisAlignment: getContentAlignment(),
           children: [
             UserThumbnail(user: _comment.user),
-            SizedBox(
+            const SizedBox(
               height: paddingSize / 2,
             ),
             Padding(
@@ -74,16 +74,5 @@ class _CommentDisplayState extends State<CommentDisplay> {
         ),
       ),
     );
-    // return Container(
-    //   // color: Theme.of(context).colorScheme.surface,
-    //   color: Colors.blue,
-    //   width: double.infinity,
-    //   child: Column(
-    //     children: [
-    //       UserThumbnail(user: _comment.user),
-    //       Text(_comment.body),
-    //     ],
-    //   ),
-    // );
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_list.dart';
 import 'package:flutter_post_feed/widgets/common/post_title.dart';
-import 'package:flutter_post_feed/widgets/posts/post_list.dart';
 
 class PostRead extends StatefulWidget {
   const PostRead({
@@ -39,8 +38,6 @@ class _PostReadState extends State<PostRead> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     const paddingSize = 10.0;
     const separatedHeight = 20.0;
 
