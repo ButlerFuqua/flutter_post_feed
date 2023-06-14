@@ -23,7 +23,7 @@ class _LikeButtonState extends State<LikeButton> {
     bool _userLikedThis = _likedIds.contains(userState.currentUser.id);
     getColor() {
       return _userLikedThis
-          ? Colors.deepOrange.shade300
+          ? Colors.deepOrange
           : Theme.of(context).colorScheme.primary;
     }
 
