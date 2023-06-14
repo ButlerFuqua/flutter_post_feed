@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/widgets/posts/post_list.dart';
 import 'package:flutter_post_feed/widgets/posts/search_bar.dart';
+import 'package:flutter_post_feed/widgets/posts/sort_created.dart';
 import 'package:flutter_post_feed/widgets/posts/sort_likes.dart';
 
 class PostFeed extends StatefulWidget {
@@ -37,6 +38,7 @@ class _PostFeedState extends State<PostFeed> {
         children: [
           PostSearchBar(),
           SortByLikes(),
+          SortByCreated(),
         ],
       )),
     );

@@ -34,7 +34,7 @@ class _PostListState extends State<PostList> {
 
     Future.delayed(Duration.zero, () {
       if (postState.posts.isEmpty) {
-        postState.setPosts(PostClient.getPosts());
+        postState.setPosts(PostClient.getPosts(sortBy: postState.sortBy));
       }
     });
 

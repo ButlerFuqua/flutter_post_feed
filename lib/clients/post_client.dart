@@ -14,6 +14,8 @@ class Post {
     required this.userId,
     required this.reactions,
     required this.imageUrl,
+    required this.createdDate,
+    required this.modifiedDate,
   });
   final int id;
   final String title;
@@ -21,6 +23,8 @@ class Post {
   final int userId;
   final List<int> reactions;
   final String imageUrl;
+  final DateTime createdDate;
+  final DateTime modifiedDate;
 
   var user;
 
@@ -45,6 +49,12 @@ class PostClient {
         break;
       case SortPostsBy.least_liked:
         posts.sort((a, b) => a.reactions.length.compareTo(b.reactions.length));
+        break;
+      case SortPostsBy.created_asc:
+        posts.sort((a, b) => a.createdDate.compareTo(b.createdDate));
+        break;
+      case SortPostsBy.created_desc:
+        posts.sort((a, b) => b.createdDate.compareTo(a.createdDate));
         break;
     }
 

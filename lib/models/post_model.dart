@@ -7,12 +7,14 @@ enum SortPostsBy {
   none,
   most_liked,
   least_liked,
+  created_asc,
+  created_desc,
 }
 
 class PostModel extends ChangeNotifier {
   List<Post> _posts = [];
 
-  var sortBy;
+  var sortBy = SortPostsBy.created_asc;
 
   UnmodifiableListView<Post> get posts => UnmodifiableListView(_posts);
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/clients/user_client.dart';
+import 'package:flutter_post_feed/utils/post_utils.dart';
+import 'package:flutter_post_feed/utils/string_utils.dart';
+import 'package:intl/intl.dart';
 
 class PostThumbnail extends StatefulWidget {
   const PostThumbnail({
@@ -37,14 +40,6 @@ class _PostThumbnailState extends State<PostThumbnail> {
       color: theme.colorScheme.primary,
     );
 
-    // TODO move this to utility methods
-    String getPostDescription(String desc) {
-      if (desc.length <= maxDescriptionLength) {
-        return desc;
-      }
-      return '${desc.substring(0, maxDescriptionLength)}...';
-    }
-
     return Container(
       color: Theme.of(context).colorScheme.surface,
       width: double.infinity,
@@ -55,19 +50,25 @@ class _PostThumbnailState extends State<PostThumbnail> {
             padding: const EdgeInsets.all(paddingSize),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.post.user?.imageUrl != null
-                    ? CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(widget.post.user?.imageUrl),
-                      )
-                    : Text('Loading'),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(widget.post.user?.imageUrl),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      widget.post.user?.username ?? 'Loading...',
+                    ),
+                  ],
+                ),
                 SizedBox(
                   width: 20,
                 ),
-                Text(
-                  widget.post.user?.username ?? 'Loading...',
-                ),
+                Text(getDisplayDate(widget.post.createdDate)),
               ],
             ),
           ),
@@ -103,7 +104,7 @@ class _PostThumbnailState extends State<PostThumbnail> {
                     )),
                 TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'View Post',
                     )),
                 TextButton(
