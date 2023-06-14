@@ -40,14 +40,18 @@ class PostClient {
       posts = posts.where((post) => !idsToSkip.contains(post.id)).toList();
     }
 
-    List<Post> sortedPosts = PostClient.sortPosts(posts, sortBy);
+    posts = PostClient.sortPosts(posts, sortBy);
+    posts = PostClient.searchPosts(posts, searchInput);
 
-    return sortedPosts.length <= PostClient.pageLimit
-        ? sortedPosts
-        : sortedPosts.sublist(0, PostClient.pageLimit);
+    return posts.length <= PostClient.pageLimit
+        ? posts
+        : posts.sublist(0, PostClient.pageLimit);
   }
 
   static List<Post> sortPosts(List<Post> unsortedPosts, var sortBy) {
+    if (sortBy == SortPostsBy.none) {
+      return unsortedPosts;
+    }
     List<Post> posts = List<Post>.from(unsortedPosts);
     switch (sortBy) {
       case SortPostsBy.most_liked:
@@ -64,5 +68,17 @@ class PostClient {
         break;
     }
     return posts;
+  }
+
+  static List<Post> searchPosts(List<Post> posts, String searchInput) {
+    String criteria = searchInput.trim().toLowerCase();
+    if (criteria == '') {
+      return posts;
+    }
+    return posts
+        .where((post) => post.title.toLowerCase().contains(criteria)
+            // post.body.toLowerCase().contains(criteria)
+            )
+        .toList();
   }
 }

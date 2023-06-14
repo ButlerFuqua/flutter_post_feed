@@ -15,6 +15,7 @@ class PostModel extends ChangeNotifier {
   List<Post> _posts = [];
 
   var sortBy = SortPostsBy.created_asc;
+  String searchInput = '';
 
   UnmodifiableListView<Post> get posts => UnmodifiableListView(_posts);
 
@@ -25,7 +26,18 @@ class PostModel extends ChangeNotifier {
 
   void sortPostsBy(var sortByValue) {
     sortBy = sortByValue;
-    _posts = PostClient.getPosts(sortBy: sortByValue);
+    _updatePostsWithFilters();
     notifyListeners();
+  }
+
+  void searchPostsBy(String criteria) {
+    searchInput = criteria;
+    _updatePostsWithFilters();
+    notifyListeners();
+  }
+
+  void _updatePostsWithFilters() {
+    _posts = PostClient.getPosts(
+        searchInput: searchInput.trim().toLowerCase(), sortBy: sortBy);
   }
 }
