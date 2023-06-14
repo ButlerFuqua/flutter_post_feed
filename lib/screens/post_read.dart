@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
+import 'package:flutter_post_feed/widgets/comments/comment_list.dart';
 import 'package:flutter_post_feed/widgets/common/post_title.dart';
 import 'package:flutter_post_feed/widgets/posts/post_list.dart';
 
@@ -67,17 +68,7 @@ class _PostReadState extends State<PostRead> {
                 const SizedBox(
                   height: separatedHeight * 2,
                 ),
-                ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 180,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 20,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Text('Some text');
-                  },
-                ),
+                CommentList(post: _post),
               ]),
             )
           : isLoading

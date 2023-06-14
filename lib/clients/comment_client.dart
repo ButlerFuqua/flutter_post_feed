@@ -1,3 +1,4 @@
+import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/fakeData/fakeComments.dart';
 
 class Comment {
@@ -10,11 +11,11 @@ class Comment {
   final int id;
   final String body;
   final int postId;
-  final Map user;
+  var user;
 }
 
 class CommentClient {
-  static List<Comment> getAllComments({limit = 10, skip = 0}) {
+  static List<Comment> getAllComments() {
     List<Comment> comments = [];
     for (var i = 0; i < allComments.length; i++) {
       var comment = allComments[i];
@@ -29,5 +30,14 @@ class CommentClient {
     }
 
     return comments;
+  }
+
+  static getCommentById(int id) {
+    Comment comment =
+        getAllComments().firstWhere((comment) => comment.id == id);
+
+    User user = UserClient.getUserById(comment.user['id']);
+    comment.user = user;
+    return comment;
   }
 }
