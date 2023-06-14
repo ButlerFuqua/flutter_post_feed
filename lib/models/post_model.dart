@@ -75,6 +75,12 @@ class PostModel extends ChangeNotifier {
             .indexOf(_posts.firstWhere((post) => post.id == newComment.postId))]
         .comments
         .add(newComment);
+
+    int postId = newComment.postId;
+    newCommentsMap[postId] = newCommentsMap[postId] != null
+        ? [...newCommentsMap[postId], newComment]
+        : [newComment];
+
     notifyListeners();
   }
 }

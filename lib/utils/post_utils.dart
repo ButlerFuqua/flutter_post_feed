@@ -22,9 +22,13 @@ Post convertPostMapToPost(Map postMap) {
     modifiedDate: getDateFromPostId(postId),
   );
   post.user = UserClient.getUserById(post.userId);
-  post.comments = CommentClient.getAllComments()
-      .where((comment) => comment.postId == post.id)
-      .toList();
+  var commentsFromState = PostModel.newCommentsMap[postId];
+  post.comments = [
+    ...CommentClient.getAllComments()
+        .where((comment) => comment.postId == post.id)
+        .toList(),
+    ...(commentsFromState ?? []),
+  ];
   return post;
 }
 

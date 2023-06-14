@@ -45,11 +45,7 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
       // This is so the comment will reload again when fetching
       postState.addCommentToPost(commentMap);
 
-      // setState(() {
       _controller.text = '';
-      // });
-
-      // Update local state with new comment (or refresh from API)
     }
 
     return Padding(

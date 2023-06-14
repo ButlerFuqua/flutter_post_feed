@@ -86,7 +86,7 @@ class _PostReadState extends State<PostRead> {
               child: SubmitCommentField(postId: _post.id),
               // child: TextField(),
             )
-          : Text('Loading...'),
+          : const Text('Loading...'),
     );
   }
 }
