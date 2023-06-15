@@ -30,8 +30,8 @@ class _PostFeedState extends State<PostFeed> {
           child: ListView(
         children: [
           PostSearchBar(),
-          const SortByLikes(),
           const SortByCreated(),
+          const SortByLikes(),
           const SortByAuthors(),
         ],
       )),

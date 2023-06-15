@@ -15,29 +15,17 @@ class _SortByCreatedState extends State<SortByCreated> {
     var postState = context.watch<PostModel>();
 
     void handlePressed() {
-      if (postState.sortBy == SortPostsBy.createdDesc) {
-        return postState.sortPostsBy(SortPostsBy.none);
+      if (postState.sortBy != SortPostsBy.newestFirst) {
+        return postState.sortPostsBy(SortPostsBy.newestFirst);
       }
-      if (postState.sortBy != SortPostsBy.createdAsc) {
-        return postState.sortPostsBy(SortPostsBy.createdAsc);
-      }
-      if (postState.sortBy == SortPostsBy.createdAsc) {
-        return postState.sortPostsBy(SortPostsBy.createdDesc);
-      }
-      postState.sortPostsBy(SortPostsBy.none);
+      return postState.sortPostsBy(SortPostsBy.oldestFirst);
     }
 
     String getButtonTextFromSortState() {
-      if (postState.sortBy == SortPostsBy.createdDesc) {
-        return 'Unsort by Created';
+      if (postState.sortBy != SortPostsBy.newestFirst) {
+        return 'Sort by Newest';
       }
-      if (postState.sortBy != SortPostsBy.createdAsc) {
-        return 'Sort by Created First';
-      }
-      if (postState.sortBy == SortPostsBy.createdAsc) {
-        return 'Sort by Created Last';
-      }
-      return 'Unsort by Created';
+      return 'Sort by Oldest';
     }
 
     return TextButton(

@@ -71,10 +71,10 @@ class PostClient {
       case SortPostsBy.leastLiked:
         posts.sort((a, b) => a.reactions.length.compareTo(b.reactions.length));
         break;
-      case SortPostsBy.createdAsc:
+      case SortPostsBy.oldestFirst:
         posts.sort((a, b) => a.createdDate.compareTo(b.createdDate));
         break;
-      case SortPostsBy.createdDesc:
+      case SortPostsBy.newestFirst:
         posts.sort((a, b) => b.createdDate.compareTo(a.createdDate));
         break;
       case SortPostsBy.authorAsc:

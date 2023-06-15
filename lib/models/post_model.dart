@@ -9,8 +9,8 @@ enum SortPostsBy {
   none,
   mostLiked,
   leastLiked,
-  createdAsc,
-  createdDesc,
+  oldestFirst,
+  newestFirst,
   authorAsc,
   authorDesc,
 }
@@ -18,7 +18,7 @@ enum SortPostsBy {
 class PostModel extends ChangeNotifier {
   List<Post> _posts = [];
 
-  var sortBy = SortPostsBy.createdDesc;
+  var sortBy = SortPostsBy.newestFirst;
   String searchInput = '';
   static Map likedStateMap = {};
   static Map newCommentsMap = {};
