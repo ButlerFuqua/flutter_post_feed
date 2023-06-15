@@ -32,8 +32,11 @@ class PostClient {
   static int pageLimit = 10;
   static bool hasMore = true;
 
-  static List<Post> getPosts(
-      {var sortBy = SortPostsBy.none, searchInput = '', List<int>? idsToSkip}) {
+  static List<Post> getPosts({
+    var sortBy = SortPostsBy.none,
+    searchInput = '',
+    List<int>? idsToSkip,
+  }) {
     List<Post> posts =
         allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
 
@@ -55,8 +58,15 @@ class PostClient {
     return posts;
   }
 
+  static getAllPosts() {
+    List<Post> posts =
+        allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
+    posts = populateReactionsFromState(posts);
+    return posts;
+  }
+
   static Post getPostById(int postId) {
-    return getPosts().firstWhere((post) => post.id == postId);
+    return getAllPosts().firstWhere((post) => post.id == postId);
   }
 
   static List<Post> sortPosts(List<Post> unsortedPosts, var sortBy) {
