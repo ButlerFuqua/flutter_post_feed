@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
@@ -51,7 +49,7 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
       CommentClient.addComment(commentMap);
 
       // Add to Provider state
-      // This is so the comment will reload again when fetching
+      // This is so the comment will show again when fetching posts from fakeData
       postState.addCommentToPost(commentMap);
 
       _controller.text = '';
