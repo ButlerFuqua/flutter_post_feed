@@ -3,6 +3,7 @@ import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_display.dart';
+import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
 import 'package:provider/provider.dart';
 
 class CommentList extends StatefulWidget {
@@ -35,18 +36,30 @@ class _CommentListState extends State<CommentList> {
 
     var post = postState.posts.firstWhere((post) => post.id == widget.post.id);
 
+    const double paddingSize = 10;
+
     return Column(
       children: [
-        Text('${post.comments.length} Comments'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            LikeButton(
+              postId: post.id,
+              likedIds: post.reactions,
+            ),
+            Text('${post.comments.length} Comments'),
+          ],
+        ),
+        Divider(),
         SizedBox(
-          height: 10,
+          height: paddingSize,
         ),
         ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: post.comments.length,
           separatorBuilder: (context, index) => const SizedBox(
-            height: 20,
+            height: paddingSize * 2,
           ),
           itemBuilder: (context, index) {
             return CommentDisplay(
