@@ -20,6 +20,7 @@ class PostModel extends ChangeNotifier {
 
   var sortBy = SortPostsBy.newestFirst;
   String searchInput = '';
+  // Used so new likes and comments will persist when posts are fetched again by the fake API
   static Map likedStateMap = {};
   static Map newCommentsMap = {};
 
@@ -48,6 +49,7 @@ class PostModel extends ChangeNotifier {
   }
 
   void toggleLikeFromPost({userId, postId}) {
+    // likedStateMap is used so the like will persist if the posts are fetched again by the fake API
     Post post =
         _posts[_posts.indexOf(_posts.firstWhere((post) => post.id == postId))];
     if (post.reactions.contains(userId)) {
@@ -76,6 +78,7 @@ class PostModel extends ChangeNotifier {
         .comments
         .add(newComment);
 
+    // This is done so the comment will persist if the posts are fetched again by the fake API
     int postId = newComment.postId;
     newCommentsMap[postId] = newCommentsMap[postId] != null
         ? [...newCommentsMap[postId], newComment]

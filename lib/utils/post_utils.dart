@@ -43,6 +43,8 @@ DateTime getDateFromPostId(int postId) {
   return DateTime(postId + 1990);
 }
 
+/// Populates posts with Reactions (likes) pulled from provider state,
+/// so it gives the illusion that likes are being persisted int he db
 List<Post> populateReactionsFromState(List<Post> posts) {
   Map likedStateMap = PostModel.likedStateMap;
   posts.forEach((post) {

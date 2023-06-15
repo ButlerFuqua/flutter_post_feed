@@ -35,6 +35,8 @@ class PostClient {
   static getAllPosts() {
     List<Post> posts =
         allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
+
+    // Used so new likes persist when posts are fetched again by the fake API
     posts = populateReactionsFromState(posts);
     return posts;
   }
