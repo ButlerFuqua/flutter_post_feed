@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/comment_client.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
@@ -54,7 +56,9 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
 
       _controller.text = '';
 
-      widget.onComplete();
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => widget.onComplete(),
+      );
     }
 
     return Padding(
