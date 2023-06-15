@@ -2,15 +2,50 @@
 
 A new Flutter project.
 
-## Getting Started
+# Required
 
-This project is a starting point for a Flutter application.
+* xCode (for mac)
+* iPhone simulator
+* VSCode (or preferred IDE)
+* [Flutter SDK](https://docs.flutter.dev/get-started/install/macos)
+* Recommended [VSCode Flutter](https://docs.flutter.dev/tools/vs-code) extensions
 
-A few resources to get you started if this is your first Flutter project:
+Run `flutter doctor` from your terminal to ensure Flutter is properly installed with necessary dependencies.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Refer to the [Flutter Docs](https://codelabs.developers.google.com/codelabs/flutter-codelab-first#1) on getting started if you have any trouble setting up your dev environment.
+
+## Run Project
+
+*This application has been tested on macOS Monterey using an iPhone 14 Pro Max simulator and VSCode as the IDE.*
+
+
+Run the following command to start the IOS simulator:
+```sh
+$ open -a Simulator --args -CurrentDeviceUDID <your device UDID>
+```
+
+Open project in VSCode and open `main.dart` and select the Run and Debug icon from the top right
+
+**OR**
+
+Run `flutter run` from the project root in the terminal.
+
+
+## Folder structure
+
+```
+/lib
+├── clients
+│   ├── reach out to API/DB
+├── fakeData
+│   ├── Fake Data used in the app
+├── models
+│   ├── model schema and state logic
+├── screens
+│   ├── top level screens in the app
+├── utils
+│   └── helper utility functions
+├── widgets
+│   └── custom built widgets
+```
