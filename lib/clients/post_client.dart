@@ -93,10 +93,9 @@ class PostClient {
       return posts;
     }
     return posts
-        .where((post) => post.title.toLowerCase().contains(criteria)
-            // TODO uncomment this to search description as well
-            // post.body.toLowerCase().contains(criteria)
-            )
+        .where((post) =>
+            post.title.toLowerCase().contains(criteria) ||
+            post.body.toLowerCase().contains(criteria))
         .toList();
   }
 

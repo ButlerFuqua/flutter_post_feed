@@ -36,6 +36,8 @@ class _PostThumbnailState extends State<PostThumbnail> {
     var postBody = widget.post.body;
     const double paddingSize = 10;
 
+    var theme = Theme.of(context);
+
     return Container(
       color: Theme.of(context).colorScheme.surface,
       width: double.infinity,
@@ -73,7 +75,10 @@ class _PostThumbnailState extends State<PostThumbnail> {
                 bottom: BorderSide(width: 1, color: Colors.grey.shade400),
               ),
             ),
-            child: Text(getPostDescription(postBody)),
+            child: Text(
+              getPostDescription(postBody),
+              // style: TextStyle(fontSize: theme.textTheme.bodyLarge!.fontSize),
+            ),
           ),
           Container(
             width: double.infinity,

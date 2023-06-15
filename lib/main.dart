@@ -27,12 +27,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            fontSize: 16,
+            height: 1.6,
+          ),
+        ),
       ),
       home: const PostFeed(),
-      // initialRoute: PostFeed.routeName,
-      // routes: <String, WidgetBuilder>{
-      //   PostFeed.routeName: (_) => const PostFeed()
-      // },
     );
   }
 }

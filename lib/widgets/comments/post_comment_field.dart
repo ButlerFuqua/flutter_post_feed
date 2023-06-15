@@ -5,9 +5,10 @@ import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:provider/provider.dart';
 
 class SubmitCommentField extends StatefulWidget {
-  const SubmitCommentField({super.key, this.postId});
+  const SubmitCommentField({super.key, this.postId, this.onComplete});
 
   final postId;
+  final onComplete;
 
   @override
   State<SubmitCommentField> createState() => _SubmitCommentFieldState();
@@ -31,7 +32,13 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
     var userState = context.watch<UserModel>();
     var postState = context.watch<PostModel>();
 
+    var theme = Theme.of(context);
+
     void handleSubmit() {
+      if (_controller.text.trim().isEmpty) {
+        return;
+      }
+
       Map commentMap = {
         'body': _controller.text.trim(),
         'postId': widget.postId,
@@ -46,6 +53,8 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
       postState.addCommentToPost(commentMap);
 
       _controller.text = '';
+
+      widget.onComplete();
     }
 
     return Padding(
@@ -62,8 +71,11 @@ class _SubmitCommentFieldState extends State<SubmitCommentField> {
             ),
           ),
           TextButton(
-            child: const Text('Submit'),
             onPressed: handleSubmit,
+            child: Text(
+              'Submit',
+              style: TextStyle(fontSize: theme.textTheme.bodyLarge!.fontSize),
+            ),
           ),
         ],
       ),

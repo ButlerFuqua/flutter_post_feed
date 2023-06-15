@@ -39,16 +39,30 @@ class _PostReadState extends State<PostRead> {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     const paddingSize = 10.0;
     const separatedHeight = 20.0;
 
+    var theme = Theme.of(context);
+
+    void onCommentSubmit() {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(
+          milliseconds: 300,
+        ),
+        curve: Curves.easeInOut,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: theme.colorScheme.inversePrimary,
         title: const Text('View post & Comments'),
       ),
       body: _post != null
           ? SingleChildScrollView(
+              controller: scrollController,
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.all(paddingSize),
@@ -61,7 +75,12 @@ class _PostReadState extends State<PostRead> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(paddingSize),
-                  child: Text(_post.body),
+                  child: Text(
+                    _post.body,
+                    style: const TextStyle(
+                      height: 2,
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: separatedHeight * 2,
@@ -83,7 +102,10 @@ class _PostReadState extends State<PostRead> {
                 ),
       bottomSheet: _post != null && !isLoading
           ? BottomAppBar(
-              child: SubmitCommentField(postId: _post.id),
+              child: SubmitCommentField(
+                postId: _post.id,
+                onComplete: onCommentSubmit,
+              ),
               // child: TextField(),
             )
           : const Text('Loading...'),

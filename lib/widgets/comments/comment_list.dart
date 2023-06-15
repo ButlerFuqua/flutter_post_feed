@@ -7,7 +7,10 @@ import 'package:flutter_post_feed/widgets/reactions/like_button.dart';
 import 'package:provider/provider.dart';
 
 class CommentList extends StatefulWidget {
-  const CommentList({super.key, this.post});
+  const CommentList({
+    super.key,
+    this.post,
+  });
 
   final post;
 
@@ -59,8 +62,8 @@ class _CommentListState extends State<CommentList> {
             ),
           ],
         ),
-        Divider(),
-        SizedBox(
+        const Divider(),
+        const SizedBox(
           height: paddingSize,
         ),
         ListView.separated(
