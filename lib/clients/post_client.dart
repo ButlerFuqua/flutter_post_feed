@@ -32,13 +32,19 @@ class PostClient {
   static int pageLimit = 10;
   static bool hasMore = true;
 
+  static getAllPosts() {
+    List<Post> posts =
+        allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
+    posts = populateReactionsFromState(posts);
+    return posts;
+  }
+
   static List<Post> getPosts({
     var sortBy = SortPostsBy.none,
     searchInput = '',
     List<int>? idsToSkip,
   }) {
-    List<Post> posts =
-        allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
+    List<Post> posts = getAllPosts();
 
     if (idsToSkip != null && idsToSkip.isNotEmpty) {
       posts = posts.where((post) => !idsToSkip.contains(post.id)).toList();
@@ -51,17 +57,8 @@ class PostClient {
         ? posts
         : posts.sublist(0, PostClient.pageLimit);
 
-    posts = populateReactionsFromState(posts);
-
     PostClient.hasMore = posts.length == PostClient.pageLimit;
 
-    return posts;
-  }
-
-  static getAllPosts() {
-    List<Post> posts =
-        allPosts.map((postMap) => convertPostMapToPost(postMap)).toList();
-    posts = populateReactionsFromState(posts);
     return posts;
   }
 
