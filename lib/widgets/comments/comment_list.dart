@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_post_feed/clients/comment_client.dart';
-import 'package:flutter_post_feed/clients/post_client.dart';
+import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
+import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_display.dart';
 import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
 import 'package:provider/provider.dart';
@@ -16,13 +16,9 @@ class CommentList extends StatefulWidget {
 }
 
 class _CommentListState extends State<CommentList> {
-  late Post _post;
-  late List<Comment> _comments;
   @override
   void initState() {
     super.initState();
-    _post = widget.post;
-    _comments = List<Comment>.from(_post.comments);
   }
 
   @override
@@ -33,10 +29,20 @@ class _CommentListState extends State<CommentList> {
   @override
   Widget build(BuildContext context) {
     var postState = context.watch<PostModel>();
+    var userState = context.watch<UserModel>();
 
     var post = postState.posts.firstWhere((post) => post.id == widget.post.id);
 
+    bool _userHasCommented = post.comments
+        .map((comment) =>
+            comment.user is User ? comment.user.id : comment.user['id'])
+        .contains(userState.currentUser.id);
+
     const double paddingSize = 10;
+
+    dynamic getCommentLabelTextColor() {
+      return _userHasCommented ? Colors.deepOrange : Colors.black;
+    }
 
     return Column(
       children: [
@@ -47,7 +53,10 @@ class _CommentListState extends State<CommentList> {
               postId: post.id,
               likedIds: post.reactions,
             ),
-            Text('${post.comments.length} Comments'),
+            Text(
+              '${post.comments.length} Comments',
+              style: TextStyle(color: getCommentLabelTextColor()),
+            ),
           ],
         ),
         Divider(),
