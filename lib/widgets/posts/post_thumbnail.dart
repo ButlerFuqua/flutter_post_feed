@@ -5,7 +5,7 @@ import 'package:flutter_post_feed/utils/string_utils.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_button.dart';
 import 'package:flutter_post_feed/widgets/common/post_title.dart';
 import 'package:flutter_post_feed/widgets/common/user_thumbnail.dart';
-import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
+import 'package:flutter_post_feed/widgets/reactions/like_button.dart';
 
 class PostThumbnail extends StatefulWidget {
   const PostThumbnail({

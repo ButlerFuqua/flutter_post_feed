@@ -3,7 +3,7 @@ import 'package:flutter_post_feed/clients/user_client.dart';
 import 'package:flutter_post_feed/models/post_model.dart';
 import 'package:flutter_post_feed/models/user_model.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_display.dart';
-import 'package:flutter_post_feed/widgets/posts/reactions/like_button.dart';
+import 'package:flutter_post_feed/widgets/reactions/like_button.dart';
 import 'package:provider/provider.dart';
 
 class CommentList extends StatefulWidget {
