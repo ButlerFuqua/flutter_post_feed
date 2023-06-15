@@ -65,22 +65,22 @@ class PostClient {
     }
     List<Post> posts = List<Post>.from(unsortedPosts);
     switch (sortBy) {
-      case SortPostsBy.most_liked:
+      case SortPostsBy.mostLiked:
         posts.sort((a, b) => b.reactions.length.compareTo(a.reactions.length));
         break;
-      case SortPostsBy.least_liked:
+      case SortPostsBy.leastLiked:
         posts.sort((a, b) => a.reactions.length.compareTo(b.reactions.length));
         break;
-      case SortPostsBy.created_asc:
+      case SortPostsBy.createdAsc:
         posts.sort((a, b) => a.createdDate.compareTo(b.createdDate));
         break;
-      case SortPostsBy.created_desc:
+      case SortPostsBy.createdDesc:
         posts.sort((a, b) => b.createdDate.compareTo(a.createdDate));
         break;
-      case SortPostsBy.author_asc:
+      case SortPostsBy.authorAsc:
         posts.sort((a, b) => a.user.username.compareTo(b.user.username));
         break;
-      case SortPostsBy.author_desc:
+      case SortPostsBy.authorDesc:
         posts.sort((a, b) => b.user.username.compareTo(a.user.username));
         break;
     }

@@ -13,13 +13,13 @@ class CommentButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var userState = context.watch<UserModel>();
-    bool _userHasCommented = comments
+    bool userHasCommented = comments
         .map((comment) =>
             (comment.user is User ? comment.user.id : comment.user['id']))
         .contains(userState.currentUser.id);
 
     getColor() {
-      return _userHasCommented
+      return userHasCommented
           ? Colors.deepOrange
           : Theme.of(context).colorScheme.primary;
     }

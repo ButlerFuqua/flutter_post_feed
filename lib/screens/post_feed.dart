@@ -25,14 +25,14 @@ class _PostFeedState extends State<PostFeed> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: PostList(),
+      body: const PostList(),
       drawer: Drawer(
           child: ListView(
         children: [
           PostSearchBar(),
-          SortByLikes(),
-          SortByCreated(),
-          SortByAuthors(),
+          const SortByLikes(),
+          const SortByCreated(),
+          const SortByAuthors(),
         ],
       )),
     );

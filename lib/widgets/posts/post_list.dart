@@ -7,6 +7,8 @@ import 'post_thumbnail.dart';
 import 'package:provider/provider.dart';
 
 class PostList extends StatefulWidget {
+  const PostList({super.key});
+
   @override
   State<PostList> createState() => _PostListState();
 }
@@ -49,7 +51,7 @@ class _PostListState extends State<PostList> {
         isLoading = true;
       });
 
-      Timer(Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 2), () {
         List<Post> posts = getFilteredPosts(
           idsToSkip: postState.posts.map((post) => post.id).toList(),
         );
@@ -80,7 +82,7 @@ class _PostListState extends State<PostList> {
     return Container(
       color: Theme.of(context).colorScheme.surfaceVariant,
       height: double.infinity,
-      child: postState.posts.length > 0
+      child: postState.posts.isNotEmpty
           ? RefreshIndicator(
               onRefresh: refresh,
               child: ListView.separated(
@@ -105,7 +107,11 @@ class _PostListState extends State<PostList> {
                 },
               ),
             )
-          : Center(child: Text('No posts yet')),
+          : const Center(
+              child: Text(
+                'No posts yet',
+              ),
+            ),
     );
   }
 }

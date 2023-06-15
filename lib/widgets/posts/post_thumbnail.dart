@@ -39,7 +39,7 @@ class _PostThumbnailState extends State<PostThumbnail> {
     var theme = Theme.of(context);
 
     return Container(
-      color: Theme.of(context).colorScheme.surface,
+      color: theme.colorScheme.surface,
       width: double.infinity,
       child: Column(
         children: [
@@ -72,12 +72,14 @@ class _PostThumbnailState extends State<PostThumbnail> {
             padding: const EdgeInsets.all(paddingSize),
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(width: 1, color: Colors.grey.shade400),
+                bottom: BorderSide(
+                  width: 1,
+                  color: Colors.grey.shade400,
+                ),
               ),
             ),
             child: Text(
               getPostDescription(postBody),
-              // style: TextStyle(fontSize: theme.textTheme.bodyLarge!.fontSize),
             ),
           ),
           Container(

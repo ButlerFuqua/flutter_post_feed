@@ -7,18 +7,18 @@ import 'package:flutter_post_feed/fakeData/fakeComments.dart';
 
 enum SortPostsBy {
   none,
-  most_liked,
-  least_liked,
-  created_asc,
-  created_desc,
-  author_asc,
-  author_desc,
+  mostLiked,
+  leastLiked,
+  createdAsc,
+  createdDesc,
+  authorAsc,
+  authorDesc,
 }
 
 class PostModel extends ChangeNotifier {
   List<Post> _posts = [];
 
-  var sortBy = SortPostsBy.created_asc;
+  var sortBy = SortPostsBy.createdAsc;
   String searchInput = '';
   static Map likedStateMap = {};
   static Map newCommentsMap = {};

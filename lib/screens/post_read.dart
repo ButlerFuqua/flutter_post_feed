@@ -24,7 +24,7 @@ class _PostReadState extends State<PostRead> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 1), () {
       _post = PostClient.getPostById(widget.postId);
       setState(() {
         isLoading = false;

@@ -36,7 +36,7 @@ class _CommentListState extends State<CommentList> {
 
     var post = postState.posts.firstWhere((post) => post.id == widget.post.id);
 
-    bool _userHasCommented = post.comments
+    bool userHasCommented = post.comments
         .map((comment) =>
             comment.user is User ? comment.user.id : comment.user['id'])
         .contains(userState.currentUser.id);
@@ -44,7 +44,7 @@ class _CommentListState extends State<CommentList> {
     const double paddingSize = 10;
 
     dynamic getCommentLabelTextColor() {
-      return _userHasCommented ? Colors.deepOrange : Colors.black;
+      return userHasCommented ? Colors.deepOrange : Colors.black;
     }
 
     return Column(

@@ -19,10 +19,10 @@ class _LikeButtonState extends State<LikeButton> {
   Widget build(BuildContext context) {
     var userState = context.watch<UserModel>();
     var postState = context.watch<PostModel>();
-    var _likedIds = [...widget.likedIds];
-    bool _userLikedThis = _likedIds.contains(userState.currentUser.id);
+    var likedIds = [...widget.likedIds];
+    bool userLikedThis = likedIds.contains(userState.currentUser.id);
     getColor() {
-      return _userLikedThis
+      return userLikedThis
           ? Colors.deepOrange
           : Theme.of(context).colorScheme.primary;
     }
@@ -31,7 +31,7 @@ class _LikeButtonState extends State<LikeButton> {
       int currentUserId = userState.currentUser.id;
 
       PostClient.toggleLikePost(
-        hasLiked: _userLikedThis,
+        hasLiked: userLikedThis,
         postId: widget.postId,
         userId: currentUserId,
       );
@@ -43,7 +43,7 @@ class _LikeButtonState extends State<LikeButton> {
     return TextButton(
         onPressed: handlePressed,
         child: Text(
-          'Like (${_likedIds.length})',
+          'Like (${likedIds.length})',
           style: TextStyle(
             color: getColor(),
           ),
