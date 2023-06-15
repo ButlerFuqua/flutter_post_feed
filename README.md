@@ -49,3 +49,8 @@ Run `flutter run` from the project root in the terminal.
 ├── widgets
 │   └── custom built widgets
 ```
+
+
+## Unit tests
+
+All tests are stored in `/test` and can be ran with running `flutter test` from the root of the project or opening the respective `_test.dart` file and selecting the run & debug icon from the IDE (tested in VSCode).
