@@ -7,6 +7,7 @@ import 'package:flutter_post_feed/utils/string_utils.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_button.dart';
 import 'package:flutter_post_feed/widgets/common/post_title.dart';
 import 'package:flutter_post_feed/widgets/common/user_thumbnail.dart';
+import 'package:flutter_post_feed/widgets/posts/post_excerpt.dart';
 import 'package:flutter_post_feed/widgets/reactions/like_button.dart';
 
 class PostThumbnail extends StatefulWidget {
@@ -85,34 +86,10 @@ class _PostThumbnailState extends State<PostThumbnail> {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(paddingSize),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 1,
-                  color: Colors.grey.shade400,
-                ),
-              ),
-            ),
-            // child: Text(postExcerpt),
-            child: Text.rich(TextSpan(
-              children: [
-                TextSpan(
-                    text: postExcerpt,
-                    style: const TextStyle(color: Colors.black)),
-                showReadMore
-                    ? TextSpan(
-                        text: ' Read More',
-                        style: const TextStyle(
-                          color: Colors.blue,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = showPostPage)
-                    : const TextSpan(text: ''),
-              ],
-            )),
+          PostExcerpt(
+            excerpt: postExcerpt,
+            showPostPage: showPostPage,
+            showReadMore: showReadMore,
           ),
           Container(
             width: double.infinity,
