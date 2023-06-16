@@ -36,7 +36,7 @@ String getPostDescription(String desc) {
   if (desc.length <= maxDescriptionLength) {
     return desc;
   }
-  return '${desc.substring(0, maxDescriptionLength)}...';
+  return '${desc.substring(0, maxDescriptionLength).trim()}...';
 }
 
 DateTime getDateFromPostId(int postId) {

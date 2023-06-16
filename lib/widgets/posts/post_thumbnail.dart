@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_post_feed/clients/post_client.dart';
+import 'package:flutter_post_feed/screens/post_read.dart';
 import 'package:flutter_post_feed/utils/post_utils.dart';
 import 'package:flutter_post_feed/utils/string_utils.dart';
 import 'package:flutter_post_feed/widgets/comments/comment_button.dart';
@@ -38,6 +40,19 @@ class _PostThumbnailState extends State<PostThumbnail> {
 
     var theme = Theme.of(context);
 
+    void showPostPage() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PostRead(
+            postId: widget.post.id,
+          ),
+        ),
+      );
+    }
+
+    String postExcerpt = getPostDescription(postBody);
+    bool showReadMore = postExcerpt != postBody;
+
     return Container(
       color: theme.colorScheme.surface,
       width: double.infinity,
@@ -63,8 +78,11 @@ class _PostThumbnailState extends State<PostThumbnail> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(paddingSize),
-            child: PostTitle(
-              titleText: postTitle,
+            child: TextButton(
+              onPressed: showPostPage,
+              child: PostTitle(
+                titleText: postTitle,
+              ),
             ),
           ),
           Container(
@@ -78,9 +96,23 @@ class _PostThumbnailState extends State<PostThumbnail> {
                 ),
               ),
             ),
-            child: Text(
-              getPostDescription(postBody),
-            ),
+            // child: Text(postExcerpt),
+            child: Text.rich(TextSpan(
+              children: [
+                TextSpan(
+                    text: postExcerpt,
+                    style: const TextStyle(color: Colors.black)),
+                showReadMore
+                    ? TextSpan(
+                        text: ' Read More',
+                        style: const TextStyle(
+                          color: Colors.blue,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = showPostPage)
+                    : const TextSpan(text: ''),
+              ],
+            )),
           ),
           Container(
             width: double.infinity,

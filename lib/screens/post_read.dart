@@ -63,33 +63,35 @@ class _PostReadState extends State<PostRead> {
       body: _post != null
           ? SingleChildScrollView(
               controller: scrollController,
-              child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(paddingSize),
-                  child: PostTitle(
-                    titleText: _post.title,
-                  ),
-                ),
-                const SizedBox(
-                  height: separatedHeight,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(paddingSize),
-                  child: Text(
-                    _post.body,
-                    style: const TextStyle(
-                      height: 2,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(paddingSize),
+                      child: PostTitle(
+                        titleText: _post.title,
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: separatedHeight * 2,
-                ),
-                CommentList(post: _post),
-                const SizedBox(
-                  height: separatedHeight * 3,
-                ),
-              ]),
+                    const SizedBox(
+                      height: separatedHeight,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(paddingSize),
+                      child: Text(
+                        _post.body,
+                        style: const TextStyle(
+                          height: 2,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: separatedHeight * 2,
+                    ),
+                    CommentList(post: _post),
+                    const SizedBox(
+                      height: separatedHeight * 3,
+                    ),
+                  ]),
             )
           : isLoading
               // TODO replace with Loader screen
